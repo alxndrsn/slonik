@@ -71,8 +71,16 @@ export const stream: InternalStreamFunctionType = async (connectionLogger, conne
 
         // Invoked if stream is destroyed using transformedStream.destroy().
         transformedStream.on('close', () => {
+          if (!queryStream.destroyed) {
+            queryStream.destroy();
+          }
+
           // @ts-expect-error
           resolve({});
+        });
+
+        transformedStream.on('error', (error: Error) => {
+          queryStream.destroy(error);
         });
 
         streamHandler(transformedStream);
