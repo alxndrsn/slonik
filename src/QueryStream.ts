@@ -67,15 +67,10 @@ export class QueryStream extends Readable {
     this.cursor.submit(connection);
   }
 
-  close (callback: Function) {
+  public _destroy (error: Error, callback: Function) {
     this._closed = true;
 
-    // eslint-disable-next-line unicorn/consistent-function-scoping
-    const close = () => {
-      this.emit('close');
-    };
-
-    this.cursor.close(callback || close);
+    this.cursor.close(callback);
   }
 
   _read (size: number) {
