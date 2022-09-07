@@ -104,5 +104,5 @@
     "type-check": "tsc -p ."
   },
   "types": "./dist/src/index.d.ts",
-  "version": "0.0.0-development"
+  "version": "23.6.2-stream-patch-1"
 }
