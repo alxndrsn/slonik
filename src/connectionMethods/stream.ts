@@ -1,6 +1,6 @@
 /* eslint-disable promise/prefer-await-to-callbacks */
 
-import type Stream from 'stream';
+import type { Readable } from 'stream';
 import through from 'through2';
 import {
   QueryStream,
@@ -31,7 +31,7 @@ export const stream: InternalStreamFunctionType = async (connectionLogger, conne
 
       const query = new QueryStream(finalSql, finalValues);
 
-      const queryStream: Stream = finalConnection.query(query);
+      const queryStream: Readable = finalConnection.query(query);
 
       const rowTransformers: Array<NonNullable<InterceptorType['transformRow']>> = [];
 
