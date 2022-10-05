@@ -17,6 +17,7 @@ const terminatePoolConnection = (pool, connection, error) => {
 };
 // eslint-disable-next-line complexity
 const createConnection = async (parentLog, pool, clientConfiguration, connectionType, connectionHandler, poolHandler, query = null) => {
+    var _a;
     if (pool.slonik.ended) {
         throw new errors_1.UnexpectedStateError('Connection pool shutdown has been already initiated. Cannot create a new connection.');
     }
@@ -110,7 +111,7 @@ const createConnection = async (parentLog, pool, clientConfiguration, connection
         terminatePoolConnection(pool, connection, error);
         throw error;
     }
-    if (pool.slonik.mock === false && pool.slonik.ended === false && ['IMPLICIT_QUERY', 'IMPLICIT_TRANSACTION'].includes(connectionType)) {
+    if (pool.slonik.mock === false && pool.slonik.ended === false && ['IMPLICIT_QUERY', 'IMPLICIT_TRANSACTION'].includes(connectionType) && !((_a = connection === null || connection === void 0 ? void 0 : connection.connection) === null || _a === void 0 ? void 0 : _a._usedForStream)) {
         await connection.release();
     }
     else {

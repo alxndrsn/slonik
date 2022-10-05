@@ -17,7 +17,7 @@ export declare class QueryStream extends Readable {
     handleReadyForQuery: Function;
     handleError: Function;
     constructor(text: any, values: any, options?: any);
-    submit(connection: Object): void;
+    submit(connection: any): void;
     _destroy(error: Error, callback: Function): void;
     _read(size: number): void;
 }

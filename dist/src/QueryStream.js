@@ -37,6 +37,7 @@ class QueryStream extends stream_1.Readable {
         this._result = this.cursor._result;
     }
     submit(connection) {
+        connection._usedForStream = true;
         this.cursor.submit(connection);
     }
     _destroy(error, callback) {
