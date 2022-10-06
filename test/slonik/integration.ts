@@ -1103,3 +1103,44 @@ test('does not crash after destroying a stream with an error', async (t) => {
 
   await pool.end();
 });
+
+test('throws error on syntax errors', async (t) => {
+  const pool = await createPool(t.context.dsn);
+
+  const error = await t.throwsAsync(pool.stream(sql`NONSENSE NOT REALLY SQL`, () => {
+    t.false('We should not have got this far!');
+  }));
+
+  t.true(error instanceof Error);
+  t.deepEqual(error?.message, 'syntax error at or near "NONSENSE"');
+
+  await pool.end();
+});
+
+test('can re-use pool after stream() and connection timeout', async (t) => {
+  const pool = await createPool(t.context.dsn, {
+    connectionTimeout: 400,
+    maximumPoolSize: 1,
+    statementTimeout: 400,
+  });
+
+  const stream: Readable = await new Promise((resolve) => {
+    void pool.stream(sql`
+      SELECT * FROM GENERATE_SERIES(1, 100)
+    `, resolve);
+  });
+
+  const error = await t.throwsAsync(pool.anyFirst(sql`SELECT TRUE`));
+  t.true(error instanceof Error);
+  t.deepEqual(error?.message, 'timeout exceeded when trying to connect');
+
+  stream.destroy();
+
+  t.deepEqual(await pool.anyFirst(sql`
+    SELECT TRUE
+  `), [
+    true,
+  ]);
+
+  await pool.end();
+});
