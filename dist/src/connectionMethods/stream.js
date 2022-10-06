@@ -55,7 +55,9 @@ const stream = async (connectionLogger, connection, clientConfiguration, rawSql,
             transformedStream.on('error', (error) => {
                 queryStream.destroy(error);
             });
-            streamHandler(transformedStream);
+            transformedStream.once('readable', () => {
+                streamHandler(transformedStream);
+            });
         });
     });
 };

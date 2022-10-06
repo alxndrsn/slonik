@@ -83,7 +83,9 @@ export const stream: InternalStreamFunctionType = async (connectionLogger, conne
           queryStream.destroy(error);
         });
 
-        streamHandler(transformedStream);
+        transformedStream.once('readable', () => {
+          streamHandler(transformedStream);
+        });
       });
     },
   );
