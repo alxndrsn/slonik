@@ -124,18 +124,5 @@ jobs:
     timeout-minutes: 10
 name: Test and build
 on:
+  push:
   pull_request:
-    branches:
-      - main
-    paths-ignore:
-      - '.editorconfig'
-      - '.husky/**'
-      - '.lintstagedrc.js'
-      - '.mergify.yml'
-      - '.nvmrc'
-      - 'README.md'
-    types:
-      - opened
-      - synchronize
-      - reopened
-      - ready_for_review
