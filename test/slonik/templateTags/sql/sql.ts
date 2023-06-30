@@ -66,7 +66,7 @@ test('throws if bound an undefined value', (t) => {
 
   t.is(
     error?.message,
-    'SQL tag cannot be bound to undefined value at index 0.',
+    'SQL tag cannot be bound to undefined value at index 1.',
   );
 });
 
