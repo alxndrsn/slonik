@@ -1,3 +1,9 @@
+name: Test and build
+on:
+  push:
+    branches: master
+  pull_request:
+
 jobs:
   build:
     environment: release
@@ -79,8 +85,3 @@ jobs:
           - 20
       max-parallel: 3
     timeout-minutes: 10
-name: Test and build
-on:
-  push:
-    branches: master
-  pull_request:
