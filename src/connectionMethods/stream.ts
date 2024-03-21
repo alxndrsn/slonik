@@ -1,6 +1,8 @@
 /* eslint-disable promise/prefer-await-to-callbacks */
 
-import type { Readable } from 'stream';
+import type {
+  Readable,
+} from 'stream';
 import through from 'through2';
 import {
   QueryStream,
