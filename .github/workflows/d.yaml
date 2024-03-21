@@ -1,4 +1,4 @@
-name: No libpq-dev
+name: No nothing
 on:
   push:
   pull_request:
@@ -18,7 +18,7 @@ jobs:
         with:
           cache: 'npm'
           node-version: '18'
-      - run: sudo apt-get -y remove libpq-dev
+      - run: sudo apt-get -y remove libpq-dev postgresql
       - run: npm ci
       - run: npm run build
     timeout-minutes: 10
