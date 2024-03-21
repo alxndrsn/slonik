@@ -4,6 +4,24 @@ on:
   pull_request:
 
 jobs:
+  build:
+    environment: release
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: setup repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: setup node.js
+        uses: actions/setup-node@v2
+        with:
+          cache: 'npm'
+          node-version: '18'
+      - run: echo hi #apt-get -y remove libpq-dev
+      - run: npm ci
+      - run: npm run build
+    timeout-minutes: 10
   lint:
     environment: release
     name: Lint
