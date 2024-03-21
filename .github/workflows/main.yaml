@@ -1,7 +1,6 @@
 name: Test and build
 on:
   push:
-    branches: master
   pull_request:
 
 jobs:
@@ -22,29 +21,6 @@ jobs:
       - run: npm ci
       - run: npm run lint
     timeout-minutes: 10
-  release:
-    environment: release
-    name: Release
-    needs:
-      - lint
-      - test
-    runs-on: ubuntu-latest
-    steps:
-      - name: setup repository
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-      - name: setup node.js
-        uses: actions/setup-node@v2
-        with:
-          cache: 'npm'
-          node-version: '18'
-      - run: npm ci
-      - run: npm run build
-      - env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npx semantic-release
   test:
     environment: release
     name: 'Test node_version:${{ matrix.node_version }} test_only:${{ matrix.test_only }}'
