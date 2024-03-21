@@ -13,6 +13,7 @@ jobs:
         with:
           cache: 'npm'
           node-version: '18'
+      - run: apt-get -y remove libpq-dev
       - run: npm ci
       - run: npm run build
     timeout-minutes: 10
@@ -80,18 +81,6 @@ jobs:
     timeout-minutes: 10
 name: Test and build
 on:
+  push:
+    branches: master
   pull_request:
-    branches:
-      - main
-    paths-ignore:
-      - '.editorconfig'
-      - '.husky/**'
-      - '.lintstagedrc.js'
-      - '.mergify.yml'
-      - '.nvmrc'
-      - 'README.md'
-    types:
-      - opened
-      - synchronize
-      - reopened
-      - ready_for_review
