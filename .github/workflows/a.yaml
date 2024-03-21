@@ -18,7 +18,7 @@ jobs:
         with:
           cache: 'npm'
           node-version: '18'
-      - run: apt-get -y remove libpq-dev
+      - run: sudo apt-get -y remove libpq-dev
       - run: npm ci
       - run: npm run build
     timeout-minutes: 10
