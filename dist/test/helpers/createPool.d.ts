@@ -12,10 +12,10 @@ export declare const createPool: (clientConfiguration?: ClientConfigurationInput
                 transactionDepth: null;
             };
         };
-        emit: (eventName: string | symbol, ...args: any[]) => boolean;
+        emit: (event: string | symbol, ...args: any[]) => boolean;
         end: () => void;
-        off: (eventName: string | symbol, listener: (...args: any[]) => void) => EventEmitter;
-        on: (eventName: string | symbol, listener: (...args: any[]) => void) => EventEmitter;
+        off: (event: string | symbol, listener: (...args: any[]) => void) => EventEmitter;
+        on: (event: string | symbol, listener: (...args: any[]) => void) => EventEmitter;
         query: () => {};
         release: () => void;
     };

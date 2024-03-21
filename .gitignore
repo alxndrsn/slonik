@@ -10,4 +10,4 @@ node_modules
 !.npmignore
 !.README
 !.travis.yml
-yarn.lock
+!yarn.lock

@@ -38,6 +38,7 @@
   "description": "A PostgreSQL client with strict types, detailed logging and assertions.",
   "devDependencies": {
     "@types/concat-stream": "^1.6.0",
+    "@types/node": "14",
     "@types/pg": "^7.14.10",
     "@types/pg-copy-streams": "^1.2.1",
     "@types/sinon": "^9.0.10",
@@ -56,12 +57,6 @@
   },
   "engines": {
     "node": ">=10.0"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run lint && npm run test && npm run build",
-      "pre-push": "gitdown ./.README/README.md --output-file ./README.md --check"
-    }
   },
   "keywords": [
     "postgresql",
@@ -98,11 +93,11 @@
   "scripts": {
     "build": "rm -fr ./dist && tsc -p tsconfig.lib.json",
     "create-readme": "gitdown ./.README/README.md --output-file ./README.md",
-    "eslint": "eslint --ext '.ts'",
+    "eslint": "eslint --cache --ext '.ts'",
     "lint": "npm run eslint ./src ./test && npm run type-check",
     "test": "NODE_ENV=test nyc ava --verbose",
     "type-check": "tsc -p ."
   },
   "types": "./dist/src/index.d.ts",
-  "version": "23.6.2-3"
+  "version": "23.6.2-4"
 }

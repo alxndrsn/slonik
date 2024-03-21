@@ -5,6 +5,9 @@ import {
 import {
   SqlToken,
 } from '../../../../src/tokens';
+import type {
+  SqlSqlTokenType,
+} from '../../../../src/types';
 
 const sql = createSqlTag();
 
@@ -55,6 +58,21 @@ test('nests sql templates', (t) => {
       'foo',
     ],
   });
+});
+
+test('does not allow non-sql templates', (t) => {
+  const query0 = {
+    sql: '); ROLLBACK; DELETE FROM user CASCADE RETURNING 1',
+    type: 'SLONIK_TOKEN_SQL',
+    values: [],
+  };
+
+  const error = t.throws(() => {
+    // @ts-expect-error
+    sql`SELECT ${'baz'} FROM (${query0})`;
+  });
+
+  t.is(error.message, 'Unexpected value expression.');
 });
 
 test('throws if bound an undefined value', (t) => {

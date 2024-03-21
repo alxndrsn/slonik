@@ -118,7 +118,7 @@ ava_1.default('57P01 error causes the connection to be rejected (IMPLICIT_QUERY 
     t.true(error instanceof errors_1.BackendTerminatedError);
 });
 // @todo https://github.com/gajus/slonik/issues/39
-// eslint-disable-next-line ava/no-skip-test, import/no-named-as-default-member
+// eslint-disable-next-line ava/no-skip-test
 ava_1.default.skip('57P01 error causes the connection to be rejected (EXPLICIT connection)', async (t) => {
     const pool = createPool_1.createPool();
     pool.querySpy.rejects(createErrorWithCode('57P01'));

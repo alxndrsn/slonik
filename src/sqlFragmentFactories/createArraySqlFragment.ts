@@ -4,6 +4,9 @@ import {
 import {
   createSqlTokenSqlFragment,
 } from '../factories';
+import {
+  SqlToken,
+} from '../tokens';
 import type {
   ArraySqlTokenType,
   SqlFragmentType,
@@ -31,7 +34,7 @@ export const createArraySqlFragment = (token: ArraySqlTokenType, greatestParamet
 
   let sql = '$' + String(placeholderIndex) + '::';
 
-  if (isSqlToken(token.memberType) && token.memberType.type === 'SLONIK_TOKEN_SQL') {
+  if (isSqlToken(token.memberType) && token.memberType.type === SqlToken) {
     const sqlFragment = createSqlTokenSqlFragment(token.memberType, placeholderIndex);
 
     placeholderIndex += sqlFragment.values.length;

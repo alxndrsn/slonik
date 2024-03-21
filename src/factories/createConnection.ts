@@ -168,7 +168,9 @@ export const createConnection = async (
     throw error;
   }
 
-  if (pool.slonik.mock === false && pool.slonik.ended === false && ['IMPLICIT_QUERY', 'IMPLICIT_TRANSACTION'].includes(connectionType) && !connection?.connection?._usedForStream) {
+  if (pool.slonik.mock === false && pool.slonik.ended === false &&
+      ['IMPLICIT_QUERY', 'IMPLICIT_TRANSACTION'].includes(connectionType) &&
+      !connection?.connection?._usedForStream) {
     await connection.release();
   } else {
     // Do not use `connection.release()` for explicit connections:
