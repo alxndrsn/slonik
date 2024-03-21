@@ -1,0 +1,24 @@
+name: Test and build
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    environment: release
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: setup repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: setup node.js
+        uses: actions/setup-node@v2
+        with:
+          cache: 'npm'
+          node-version: '18'
+      - run: sudo apt-get -y remove postgresql
+      - run: npm ci
+      - run: npm run build
+    timeout-minutes: 10
