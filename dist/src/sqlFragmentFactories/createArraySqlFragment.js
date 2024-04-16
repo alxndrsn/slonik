@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.createArraySqlFragment = void 0;
 const errors_1 = require("../errors");
 const factories_1 = require("../factories");
+const tokens_1 = require("../tokens");
 const utilities_1 = require("../utilities");
 const createArraySqlFragment = (token, greatestParameterPosition) => {
     let placeholderIndex = greatestParameterPosition;
@@ -16,7 +17,7 @@ const createArraySqlFragment = (token, greatestParameterPosition) => {
     ];
     placeholderIndex++;
     let sql = '$' + String(placeholderIndex) + '::';
-    if (utilities_1.isSqlToken(token.memberType) && token.memberType.type === 'SLONIK_TOKEN_SQL') {
+    if (utilities_1.isSqlToken(token.memberType) && token.memberType.type === tokens_1.SqlToken) {
         const sqlFragment = factories_1.createSqlTokenSqlFragment(token.memberType, placeholderIndex);
         placeholderIndex += sqlFragment.values.length;
         // @ts-expect-error (is this right?)

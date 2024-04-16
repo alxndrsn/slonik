@@ -48,6 +48,18 @@ ava_1.default('nests sql templates', (t) => {
         ],
     });
 });
+ava_1.default('does not allow non-sql templates', (t) => {
+    const query0 = {
+        sql: '); ROLLBACK; DELETE FROM user CASCADE RETURNING 1',
+        type: 'SLONIK_TOKEN_SQL',
+        values: [],
+    };
+    const error = t.throws(() => {
+        // @ts-expect-error
+        sql `SELECT ${'baz'} FROM (${query0})`;
+    });
+    t.is(error.message, 'Unexpected value expression.');
+});
 ava_1.default('throws if bound an undefined value', (t) => {
     const error = t.throws(() => {
         // @ts-expect-error

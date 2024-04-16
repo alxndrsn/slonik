@@ -309,6 +309,7 @@ __metadata:
   resolution: "@getodk/slonik@workspace:."
   dependencies:
     "@types/concat-stream": ^1.6.0
+    "@types/node": 14
     "@types/pg": ^7.14.10
     "@types/pg-copy-streams": ^1.2.1
     "@types/sinon": ^9.0.10
@@ -1130,6 +1131,13 @@ __metadata:
   dependencies:
     undici-types: ~5.26.4
   checksum: 7cc979f7e2ca9a339ec71318c3901b9978555257929ef3666987f3e447123bc6dc92afcc89f6347e09e07d602fde7d51bcddea626c23aa2bb74aeaacfd1e1686
+  languageName: node
+  linkType: hard
+
+"@types/node@npm:14":
+  version: 14.18.63
+  resolution: "@types/node@npm:14.18.63"
+  checksum: be909061a54931778c71c49dc562586c32f909c4b6197e3d71e6dac726d8bd9fccb9f599c0df99f52742b68153712b5097c0f00cac4e279fa894b0ea6719a8fd
   languageName: node
   linkType: hard
 
