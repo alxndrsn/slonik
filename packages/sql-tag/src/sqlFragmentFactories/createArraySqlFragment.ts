@@ -37,10 +37,7 @@ export const createArraySqlFragment = (
 
   let sql = formatSlonikPlaceholder(placeholderIndex) + '::';
 
-  if (
-    isSqlToken(token.memberType) &&
-    token.memberType.type === FragmentToken
-  ) {
+  if (isSqlToken(token.memberType) && token.memberType.type === FragmentToken) {
     const sqlFragment = createSqlTokenSqlFragment(
       token.memberType,
       placeholderIndex,
