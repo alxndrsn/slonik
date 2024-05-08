@@ -104,5 +104,3 @@ jobs:
 name: Lint, build and release
 on:
   push:
-    branches:
-      - main
