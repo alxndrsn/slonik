@@ -153,6 +153,32 @@ export const createIntegrationTests = (
     t.true(error instanceof InvalidInputError);
   });
 
+  test('allows multiple statements in a single query, but throws error', async (t) => {
+    const pool = await createPool(t.context.dsn, {
+      driverFactory,
+    });
+
+    const error = await t.throwsAsync(
+      pool.query(sql.unsafe`
+        CREATE TABLE person (
+          id INTEGER GENERATED ALWAYS AS IDENTITY,
+          name TEXT NOT NULL,
+          PRIMARY KEY (id)
+        );
+        INSERT INTO person (name) VALUES('alice');
+        INSERT INTO person (name) VALUES('bob');
+      `),
+    );
+
+    t.true(error instanceof InvalidInputError);
+
+    const result = pool.query(sql.unsafe`
+      SELECT name FROM person
+    `);
+
+    t.deepEqual(result, [ 'alice', 'bob' ]);
+  });
+
   test('NotNullIntegrityConstraintViolationError identifies the table and column', async (t) => {
     const pool = await createPool(t.context.dsn, {
       driverFactory,
