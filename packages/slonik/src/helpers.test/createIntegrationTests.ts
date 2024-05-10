@@ -176,7 +176,7 @@ export const createIntegrationTests = (
       SELECT name FROM person
     `);
 
-    t.deepEqual(result, [ 'alice', 'bob' ]);
+    t.deepEqual(result, ['alice', 'bob']);
   });
 
   test('NotNullIntegrityConstraintViolationError identifies the table and column', async (t) => {
