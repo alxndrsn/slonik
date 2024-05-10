@@ -160,11 +160,6 @@ export const createIntegrationTests = (
 
     const error = await t.throwsAsync(
       pool.query(sql.unsafe`
-        CREATE TABLE person (
-          id INTEGER GENERATED ALWAYS AS IDENTITY,
-          name TEXT NOT NULL,
-          PRIMARY KEY (id)
-        );
         INSERT INTO person (name) VALUES('alice');
         INSERT INTO person (name) VALUES('bob');
       `),
