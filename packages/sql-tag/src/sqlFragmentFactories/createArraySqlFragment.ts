@@ -39,7 +39,7 @@ export const createArraySqlFragment = (
 
   if (
     isSqlToken(token.memberType) &&
-    Symbol.keyFor(token.memberType.type) === 'SLONIK_TOKEN_FRAGMENT'
+    token.memberType.type === Symbol.for('SLONIK_TOKEN_FRAGMENT')
   ) {
     const sqlFragment = createSqlTokenSqlFragment(
       token.memberType,
