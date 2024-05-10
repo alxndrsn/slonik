@@ -306,12 +306,6 @@ export const createPgDriverFactory = (): DriverFactory => {
               });
             }
 
-            if (Array.isArray(result)) {
-              throw new InvalidInputError(
-                'Must not use multiple statements in a single query.',
-              );
-            }
-
             return {
               command: result.command as DriverCommand,
               fields: result.fields.map((field) => {
