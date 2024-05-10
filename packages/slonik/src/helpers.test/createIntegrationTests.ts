@@ -154,15 +154,15 @@ export const createIntegrationTests = (
   });
 
   test('allows multiple statements in a single query, but throws error', async (t) => {
+    const pool = await createPool(t.context.dsn, {
+      driverFactory,
+    });
+
     const result1 = await pool.query(sql.unsafe`
       SELECT name FROM person
     `);
 
     t.deepEqual(result1, []);
-
-    const pool = await createPool(t.context.dsn, {
-      driverFactory,
-    });
 
     const error = await t.throwsAsync(
       pool.query(sql.unsafe`
