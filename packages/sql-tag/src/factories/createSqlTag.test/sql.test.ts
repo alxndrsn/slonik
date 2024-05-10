@@ -1,5 +1,6 @@
 import { FragmentToken } from '../../tokens';
 import { createSqlTag } from '../createSqlTag';
+import { InvalidInputError } from '@slonik/errors';
 import anyTest, { type TestFn } from 'ava';
 import { ROARR } from 'roarr';
 
@@ -23,7 +24,7 @@ test('throws error if called as a function', (t) => {
     sql.fragment([`SELECT 1`]);
   });
 
-  console.log('Caught error:', error);
+  t.true(error instanceof InvalidInputError);
 });
 
 test('creates an object describing a query', (t) => {
