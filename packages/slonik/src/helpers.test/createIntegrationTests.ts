@@ -171,8 +171,6 @@ export const createIntegrationTests = (
       `),
     );
 
-    console.log('Caught error:', error);
-
     t.true(error instanceof InvalidInputError);
 
     const result = await pool.anyFirst(sql.unsafe`
