@@ -17,6 +17,13 @@ test.beforeEach((t) => {
   };
 });
 
+test('throws error if called as a function', (t) => {
+  const error = t.throws(() => {
+    // @ts-expect-error - intentional
+    sql.fragment(`SELECT 1`);
+  });
+});
+
 test('creates an object describing a query', (t) => {
   const query = sql.fragment`SELECT 1`;
 
