@@ -158,7 +158,7 @@ export const createIntegrationTests = (
       driverFactory,
     });
 
-    const result1 = await pool.query(sql.unsafe`
+    const result1 = await pool.anyFirst(sql.unsafe`
       SELECT name FROM person
     `);
 
@@ -175,7 +175,7 @@ export const createIntegrationTests = (
 
     t.true(error instanceof InvalidInputError);
 
-    const result = await pool.query(sql.unsafe`
+    const result = await pool.anyFirst(sql.unsafe`
       SELECT name FROM person
     `);
 
