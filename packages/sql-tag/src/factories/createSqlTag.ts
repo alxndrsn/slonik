@@ -32,7 +32,7 @@ const log = Logger.child({
 });
 
 const createFragment = (
-  parts: readonly TemplateStringsArray,
+  parts: TemplateStringsArray,
   values: readonly ValueExpression[],
 ) => {
   if (!Array.isArray(parts.raw) || !Object.isFrozen(parts.raw)) {
@@ -185,7 +185,7 @@ export const createSqlTag = <
     },
     type: (parser) => {
       return (
-        parts: readonly TemplateStringsArray,
+        parts: TemplateStringsArray,
         ...args: readonly ValueExpression[]
       ) => {
         return Object.freeze({
@@ -203,7 +203,7 @@ export const createSqlTag = <
       }
 
       return (
-        parts: readonly TemplateStringsArray,
+        parts: TemplateStringsArray,
         ...args: readonly ValueExpression[]
       ) => {
         return Object.freeze({
