@@ -185,7 +185,7 @@ export const createSqlTag = <
     },
     type: (parser) => {
       return (
-        parts: readonly string[],
+        parts: readonly TemplateStringsArray,
         ...args: readonly ValueExpression[]
       ) => {
         return Object.freeze({
@@ -203,7 +203,7 @@ export const createSqlTag = <
       }
 
       return (
-        parts: readonly string[],
+        parts: readonly TemplateStringsArray,
         ...args: readonly ValueExpression[]
       ) => {
         return Object.freeze({
