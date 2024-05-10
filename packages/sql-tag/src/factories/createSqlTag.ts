@@ -32,7 +32,7 @@ const log = Logger.child({
 });
 
 const createFragment = (
-  parts: readonly string[],
+  parts: readonly TemplateStringsArray,
   values: readonly ValueExpression[],
 ) => {
   if (!Array.isArray(parts.raw) || !Object.isFrozen(parts.raw)) {
